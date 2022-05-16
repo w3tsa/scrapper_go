@@ -8,4 +8,6 @@
 
 - You have to have GO installed in your machine: https://go.dev/
 - Clone down repo in you machine
-- From the terminal: ```go run main.go```
+- From the terminal: ```go run main.go scrapper.go```
+- Server will run on PORT: 8080
+- If you have Live server installed in your VS code, you can start the client/index.html
