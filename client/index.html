@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapping Data</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    a {
+        color: black;
+        cursor: pointer;
+    }
+
+    #root {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+
+    div {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 10px;
+        height: 100%;
+    }
+</style>
+<body>
+    <div id="root"></div>
+</body>
+
+<script>
+    const root = document.getElementById('root');
+    try {
+        const getData = async () => {
+            const data = await fetch("http://localhost:8080/api/articles");
+            const results = await data.json();
+
+            results.forEach(element => {
+            const container = document.createElement('div');
+        
+            const img = document.createElement('img');
+            img.src = element.image;
+
+            const h2 = document.createElement('h2');
+            
+            const link = document.createElement('a');
+            link.href = element.link;
+            link.target = "_blank";
+            link.textContent = element.title;
+
+            h2.append(link)
+            
+            const p = document.createElement('p');
+            p.textContent = element.excerpt;
+            
+            container.append(img);
+            container.append(h2);
+            container.append(p);
+            root.append(container);
+            }); 
+        } 
+    getData()
+    } catch (error) {
+        console.error(error);
+    }
+</script>
+</html>
